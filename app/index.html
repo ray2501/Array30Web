@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <title>行列輸入法網頁版</title>
+  <meta name="description" content="行列輸入法網頁版：在瀏覽器使用的輸入法頁面">
+  <meta name="author" content="Danilo Chang">
+  <meta name="keywords" content="輸入法">
+  <link rel="shortcut icon" href="ar30.ico">
+  <link rel="icon" href="ar30.ico" type="image/ico">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body>
+  <div class="main">
+    <div class="left">
+      <div id="edit_area">
+        <textarea id="text_area" rows="15" cols="60"></textarea>
+        <div class="function" id="function">
+          <table>
+          <tr>
+          <td><div class="input_mode" id="input_mode">【行列】【半形】</div></td>
+          <td><div class="preedit" id="preedit"></div></td>
+          </tr>
+          </table>
+          <div class="candidates" id="candidates"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <details open>
+      <details>
+        <summary> 說明 </summary>
+        <p>行列輸入法（30鍵版）是一套免費授權、具有開放理念的字根式中文輸入法，為倚天資訊共同創辦人廖明德先生所發明。
+        不僅能輸入繁體中文和簡體中文，亦可輸入 Unicode 當中的中日韓統一表意文字，總數超過 7 萬字。</p>
+        <ul>
+        <li>Shift = 切換中文、英文模式</li>
+        <li>Shift＋Space = 切換半形、全形模式</li>
+        </ul>
+      </details>
+      <details>
+        <summary> 其他 </summary>
+        <ul>
+          <li><a href="https://www.facebook.com/array.com.tw/" target="_blank">行列輸入法的家</a></li>
+          <li><a href="https://github.com/gontera/array30" target="_blank">行列輸入法表格</a></li>
+          <li><a href="http://www.array30.com/" target="_blank">行列小站</a></li>
+          <li><a href="https://array30.misterfishup.com/" target="_blank">FISH UP 行列查碼</a></li>
+        </ul>
+        <p>This code is released under the MIT license.</p>
+      </details>
+    </div>
+  </div>
+</body>
+
+<script lang="javascript" src="bundle.js"></script>
+<script lang="javascript" src="ui.js"></script>
+
+</html>
