@@ -8,6 +8,7 @@ export class InputController {
     input_buffer = "";
     candidateList = null;
     space_count = 0;
+    wildcard_count = 0;
     symbol_lookup = false;
     phrase_lookup = false;
 
@@ -44,6 +45,7 @@ export class InputController {
             "p": "0^",
             ";": "0-",
             "/": "0v",
+            "?": " ?",
             "0": " 0",
             "1": " 1",
             "2": " 2",
@@ -61,12 +63,14 @@ export class InputController {
         this.input_buffer = "";
         this.candidateList = null;
         this.space_count = 0;
+        this.wildcard_count = 0;
     }
 
     reset() {
         this.input_buffer = "";
         this.candidateList = null;
         this.space_count = 0;
+        this.wildcard_count = 0;
 
         this.ui.reset();
     }
@@ -89,11 +93,27 @@ export class InputController {
                 candidates = webData[string].slice();
             else
                 candidates = [];
-        } else if (string.length <= 2 && this.space_count == 0) {
+        } else if (string.length <= 2 && this.space_count == 0 && this.wildcard_count == 0) {
             if (simpleCode[string] !== undefined)
                 candidates = simpleCode[string].slice();
             else
                 candidates = [];
+        } else if (this.wildcard_count > 0) {
+            /*
+             * Using regular expression to match keys.
+             * It works for me.
+             */
+            let mystring = "^";
+            mystring += string.replaceAll("?", ".{1}");
+            mystring += "$";
+
+            let regex = new RegExp(mystring);
+            for (let key in webData) {
+                if (key.match(regex) != null) {
+                    let wresult = webData[key].slice();
+                    candidates.push(...wresult);
+                }
+            }
         } else {
             if (webData[string] !== undefined)
                 candidates = webData[string].slice();
@@ -225,6 +245,10 @@ export class InputController {
 
                 this.space_count = 0;
 
+                if (this.input_buffer.charAt(this.input_buffer.length - 1) === '?') {
+                    this.wildcard_count--;
+                }
+
                 this.input_buffer =
                     this.input_buffer.substr(0, this.input_buffer.length - 1);
 
@@ -311,7 +335,8 @@ export class InputController {
 
             if ((keyval >= "a" && keyval <= "z") ||
                 keyval === ";" || keyval === "," ||
-                keyval === "." || keyval === "/") {
+                keyval === "." || keyval === "/" ||
+                keyval === "?") {
 
                 if (this.space_count == 1) {
                     let candidatewords = this.candidateList.getCandidates().slice();
@@ -326,6 +351,10 @@ export class InputController {
                 }
 
                 this.input_buffer += keyval;
+
+                if (keyval === "?") {
+                    this.wildcard_count++;
+                }
 
                 this.update(this.input_buffer);
                 return true;
