@@ -223,6 +223,8 @@ export class InputController {
                     return false;
                 }
 
+                this.space_count = 0;
+
                 this.input_buffer =
                     this.input_buffer.substr(0, this.input_buffer.length - 1);
 
