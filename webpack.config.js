@@ -9,8 +9,10 @@ export default  {
   ],
   output: {
     filename: "bundle.js",
-    library: "array30",
-    libraryTarget: "umd",
+    library: {
+      name: 'array30',
+      type: 'umd',
+    },
     path: path.resolve(__dirname, "app"),
   },
 };
