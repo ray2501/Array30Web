@@ -93,6 +93,14 @@ export class InputController {
                 candidates = webData[string].slice();
             else
                 candidates = [];
+        } else if (string.charAt(0) === 'h' && string.charAt(1) === 'g' &&
+                   string.length == 3 && this.symbol_lookup == true) {
+            this.symbol_lookup = false;
+
+            if (webData[string] !== undefined)
+                candidates = webData[string].slice();
+            else
+                candidates = [];
         } else if (string.length <= 2 && this.space_count == 0 && this.wildcard_count == 0) {
             if (simpleCode[string] !== undefined)
                 candidates = simpleCode[string].slice();
@@ -314,6 +322,15 @@ export class InputController {
 
                 if (this.input_buffer.length == 1 &&
                     this.input_buffer.charAt(0) === 'w') {
+                    this.symbol_lookup = true;
+                    this.input_buffer += keyval;
+                    this.update(this.input_buffer);
+                    return true;
+                }
+
+                if (this.input_buffer.length == 2 &&
+                    this.input_buffer.charAt(0) === 'h' &&
+                    this.input_buffer.charAt(1) === 'g') {
                     this.symbol_lookup = true;
                     this.input_buffer += keyval;
                     this.update(this.input_buffer);
