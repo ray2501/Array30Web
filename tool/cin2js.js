@@ -3,7 +3,7 @@
 import fs from 'fs';
 
 const args = process.argv;
-let filename = 'array30-OpenVanilla-big-v2026-1.02-20260407.cin';
+let filename = 'array30-OpenVanilla-big.cin';
 let varname = 'webData'
 if (args.length > 2 && args.length == 4) {
     filename = args[2];
